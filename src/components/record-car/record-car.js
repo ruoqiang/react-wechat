@@ -10,10 +10,26 @@ class RecordCar extends Component {
         this.state = {
             items: [1,1,2,3,4,3,4,45,3,5,3,54,3,345,34,5,5,5],
             btnDisable: false,
-            mask: false
+            mask: false,
+            backTopShow: false
         }
         // this._btnClick = this._btnClick.bind(this)
-        // this.backTop = this.backTop.bind(this)
+        this.scroll = React.createRef()
+        this.backTop = this.backTop.bind(this)
+        this.onScroll = this.onScroll.bind(this)
+
+    }
+    onScroll (pos) {
+        console.log(pos)
+        if (pos.y < -160) {
+            this.setState({backTopShow: true})
+          } else {
+            this.setState({backTopShow: false})
+          }
+    }
+    backTop() {
+        // this.refs.scroll.scrollTo(0, 0, 500) //ref="scroll"
+        this.scroll.current.scrollTo(0, 0, 500) //ref={this.scroll}
     }
     render(){
         return(
@@ -39,7 +55,7 @@ class RecordCar extends Component {
                 </div>
                 <div className="record-list-box-wrap" ref="recordListBoxWrap" style={{height: '360px'}}>
                 <div id="record-list">
-                        <Scroll data="items" ref="scroll">
+                        <Scroll ref={this.scroll} data={this.state.items}  isOverflowHidden probeType={3} listenScroll={true} onScroll={this.onScroll}>
                             <div className="record-list-box hasBj">
                             {this.state.items.map((item,index)=> {
                                 return (
@@ -93,7 +109,10 @@ class RecordCar extends Component {
                     }
                     
                 </div>
-                <div className="icon-top"></div>
+                {
+                    this.state.backTopShow ? (<div className="icon-top" onClick={this.backTop}></div>) : null
+                }
+                
                 {
                     this.state.mask ? (<div className="mask" ref="mask"></div>) : null
                 }

@@ -16,7 +16,8 @@ export default class componentName extends Component {
     className: PropTypes.string,
     onScroll: PropTypes.func,
     onPullup: PropTypes.func,
-    onBeforeScroll: PropTypes.func
+    onBeforeScroll: PropTypes.func,
+    isOverflowHidden: PropTypes.bool
   }
 
   static defaultProps = {
@@ -27,6 +28,7 @@ export default class componentName extends Component {
     data: null,
     pullup: false,
     beforeScroll: false,
+    isOverflowHidden: false,
     refreshDelay: 20,
     direction: 'vertical', //默认y轴
     className: 'scroll-wrapper',
@@ -81,6 +83,9 @@ export default class componentName extends Component {
       this.scroll.on('beforeScrollStart', () => {
         this.props.onBeforeScroll()
       })
+    }
+    if (this.props.isOverflowHidden) {
+      this.scrollWrapper.current.style.overflow = 'visible'
     }
   }
   stop() {
