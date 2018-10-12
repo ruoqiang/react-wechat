@@ -15,9 +15,17 @@ class RecordCar extends Component {
         }
         // this._btnClick = this._btnClick.bind(this)
         this.scroll = React.createRef()
+        this.recordListBoxWrap = React.createRef()
+        this.recordImg = React.createRef()
         this.backTop = this.backTop.bind(this)
         this.onScroll = this.onScroll.bind(this)
 
+    }
+    componentDidMount() {
+        var _height = this.recordImg.current.clientHeight
+        var _boxHeight = window.innerHeight
+        this.recordListBoxWrap.current.style.height = `${_boxHeight - _height}px`
+        this.recordListBoxWrap.current.style.marginTop = `15px`
     }
     onScroll (pos) {
         console.log(pos)
@@ -34,7 +42,7 @@ class RecordCar extends Component {
     render(){
         return(
             <div id="record-car">
-                <div className="record-img" ref="recordImg">
+                <div className="record-img" ref={this.recordImg}>
                 <div className="record-time-span">
                     <div className="span-title">
                     出站时间段
@@ -53,7 +61,7 @@ class RecordCar extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="record-list-box-wrap" ref="recordListBoxWrap" style={{height: '360px'}}>
+                <div className="record-list-box-wrap" ref={this.recordListBoxWrap} style={{height: '360px'}}>
                 <div id="record-list">
                         <Scroll ref={this.scroll} data={this.state.items}  isOverflowHidden probeType={3} listenScroll={true} onScroll={this.onScroll}>
                             <div className="record-list-box hasBj">

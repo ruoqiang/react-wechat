@@ -20,7 +20,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-*.docx
+# *.docx
 *.zip
 08-08/
 04_userinfo/

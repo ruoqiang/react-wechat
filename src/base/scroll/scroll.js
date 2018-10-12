@@ -44,7 +44,7 @@ export default class componentName extends Component {
     this.scrollWrapper = React.createRef()
   }
   componentDidMount() {
-    // 价格延时顺滑很多？？？？
+    // 延时顺滑很多？？？？
     setTimeout(() => {
       this._initScroll()
     }, 20)
