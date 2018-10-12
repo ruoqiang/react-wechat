@@ -26,9 +26,7 @@ class Home extends Component{
     componentDidMount() {
         let _height = window.innerHeight + 1
         this.homeCon.current.style.height = _height + 'px'
-        // this.props.changeScrollTopShow()
-        // this.props.changeHomeData();
-        // this.props.getUserBaseInfo()
+        
         this._initActionSlide()
     }
     _initActionSlide () {
@@ -92,11 +90,11 @@ class Home extends Component{
                                     <p>申请记录</p>
                                 </div>
                                 <div className="card-item">
-                                    <img src={require('../../common/image/icon-bill.png')} alt="" onClick={() => this.goToNext('forgetpassword')}/>
+                                    <img src={require('../../common/image/icon-bill.png')} alt="" onClick={() => this.goToNext('selectCar/1')}/>
                                     <p>账单查询</p>
                                 </div>
                                 <div className="card-item">
-                                    <img src={require('../../common/image/icon-applyRecord.png')} alt="" onClick={() => this.goToNext('register')}/>
+                                    <img src={require('../../common/image/icon-applyRecord.png')} alt="" onClick={() => this.goToNext('selectCar/2')}/>
                                     <p>申请记录</p>
                                 </div>
                             </div>
@@ -147,4 +145,4 @@ const mapDispatch = (dispatch) => ({
         dispatch(actionCreators.setToken('cccc'))
     }
 });
-export default withRouter(connect(mapState, mapDispatch)(Home));
+export default (connect(mapState, mapDispatch)(Home));

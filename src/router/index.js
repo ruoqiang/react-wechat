@@ -15,6 +15,9 @@ const userBaseInfo = LazyLoadComponent({loader: () => import('components/user-ba
 const userCarInfo = LazyLoadComponent({loader: () => import('components/user-carinfo/user-carinfo')})
 const userUpload = LazyLoadComponent({loader: () => import('components/user-upload/user-upload')})
 const userAddAddress = LazyLoadComponent({loader: () => import('components/user-add-address/user-add-address')})
+const SelectCar = LazyLoadComponent({loader: () => import('components/select-car/select-car')})
+const RecordCar = LazyLoadComponent({loader: () => import('components/record-car/record-car')})
+const Bill = LazyLoadComponent({loader: () => import('components/bill/bill')})
 
 class RouteConfig extends Component{
   render() {
@@ -31,6 +34,9 @@ class RouteConfig extends Component{
               <Route path="/userCarInfo" component={userCarInfo}></Route>
               <Route path="/userUpload" component={userUpload}></Route>
               <Route path="/userAddAddress" component={userAddAddress}></Route>
+              <Route path="/selectCar/:id" component={SelectCar}></Route>
+              <Route path="/recordCar" component={RecordCar}></Route>
+              <Route path="/bill" component={Bill}></Route>
               <Redirect from="/" to="/home"></Redirect>
             </Switch>
           </div>
