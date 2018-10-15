@@ -7,7 +7,8 @@ class TipsStatus extends Component {
         text: PropTypes.string,
         statusClass: PropTypes.string,
         data: PropTypes.array,
-        btnClick: PropTypes.func
+        btnClick: PropTypes.func,
+        buttonHide: PropTypes.bool
       }
     
       static defaultProps = {
@@ -15,7 +16,8 @@ class TipsStatus extends Component {
         text: '返回',
         statusClass: 'success',
         data: [0],
-        btnClick: f => f
+        btnClick: f => f,
+        buttonHide: false
       }
       constructor(props) {
         super(props)
@@ -40,9 +42,11 @@ class TipsStatus extends Component {
             <div className="tips-status" style={{'display': this.state.flag}}>
                 <p className="statusImg"></p>
                 <p className="desc">{this.props.title}</p>
-                <div className="backbutton" onClick={this.confirm}>
-                {this.props.text}
-            </div>
+                {!this.props.buttonHide === true? (
+                  <div className="backbutton" onClick={this.confirm}>
+                    {this.props.text}
+                </div>
+                ) : null}
         </div>
         )
     }

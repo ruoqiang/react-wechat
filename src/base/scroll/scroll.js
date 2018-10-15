@@ -75,7 +75,9 @@ export default class componentName extends Component {
     if (this.props.pullup) {
       this.scroll.on('scrollEnd', () => {
         if (this.scroll.y <= this.scroll.maxScrollY + 50) {
-          this.props.onPullup()
+          setTimeout(() => {
+            this.props.onPullup()
+          }, 500)
         }
       })
     }
