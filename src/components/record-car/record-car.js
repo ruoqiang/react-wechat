@@ -5,6 +5,7 @@ import TipsStatus from 'base/tipsStatus/tipsStatus'
 import axios from 'common/js/http'
 import { url } from 'common/js/config'
 import { getNowDate } from 'common/js/util'
+import DatePicker from 'base/date-picker/date-picker'
 import './record-car.styl'
 let pageSize = 10
 class RecordCar extends Component {
@@ -15,7 +16,9 @@ class RecordCar extends Component {
             mask: false,
             backTopShow: false,
             ajaxLoaingShow: true,
-            recordList: []
+            recordList: [],
+            defaultDate: '',
+            defaultDate2: ''
         }
         this._btnClick = this._btnClick.bind(this)
         this.scroll = React.createRef()
@@ -27,12 +30,18 @@ class RecordCar extends Component {
         this._checkMore = this._checkMore.bind(this)
         this.onPullup = this.onPullup.bind(this)
         this.formateDate = this.formateDate.bind(this)
-        this.defaultDate = getNowDate(-30)
-        this.defaultDate2 = getNowDate()
+        
         let carListInfo = JSON.parse(localStorage.getItem('carListInfo'))
         this.carNo =  carListInfo && carListInfo.CarNum //"贵A566N5" //
         this.hasMore = true
         this.page = 0
+        /*date-picker*/
+        this.selectedDateFn = this.selectedDateFn.bind(this)
+        this.selectedDateFnStart = this.selectedDateFnStart.bind(this)
+        this.selectedDateFnEnd = this.selectedDateFnEnd.bind(this)
+        
+        this.defaultDate = getNowDate(-30)
+        this.defaultDate2 = getNowDate()
     }
     componentDidMount() {
         var _height = this.recordImg.current.clientHeight
@@ -127,6 +136,19 @@ class RecordCar extends Component {
       formateDate(val) {
         return val ? val.replace('T', ' ') : ''
       }
+      selectedDateFn(val) {
+        console.log(val);
+        
+      }
+      selectedDateFnStart (val) {
+        this.defaultDate = val
+        console.log(this.defaultDate);
+        // this.setState({defaultDate: val})
+      }
+      selectedDateFnEnd (val) {
+        this.defaultDate2 = val
+        console.log(this.defaultDate2);
+      }
     render(){
         return(
             <div id="record-car">
@@ -136,9 +158,9 @@ class RecordCar extends Component {
                     出站时间段
                     </div>
                     <div className="time-span">
-                    <span className="time">2018-02-50</span>
+                    <span className="time"><DatePicker defaultDate={this.defaultDate} selectedDateFn={this.selectedDateFnStart}></DatePicker></span>
                     <span className="text">至</span>
-                    <span className="time">2018-02-50</span>
+                    <span className="time"><DatePicker defaultDate={this.defaultDate2} selectedDateFn={this.selectedDateFnEnd}></DatePicker></span>
                     </div>
                     <div className="btn" onClick={this._btnClick}>
                         <div className="buttonBox" style={{marginTop: '25px'}}>
