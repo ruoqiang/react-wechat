@@ -27,7 +27,7 @@ class Loading extends PureComponent {
     }
     render() {
         return (
-            <div className={'loading ' + this.props.displayType}>
+            <div className={'loading ' + this.props.displayType} style={{display: this.state.flag ? 'block': 'none'}}>
                 <img width={this.props.size} height={this.props.size} src={require('./loading.gif')} alt=""/>
                 <p className="desc">{this.props.title}</p>
             </div>

@@ -16,9 +16,7 @@ class RecordCar extends Component {
             mask: false,
             backTopShow: false,
             ajaxLoaingShow: true,
-            recordList: [],
-            defaultDate: '',
-            defaultDate2: ''
+            recordList: []
         }
         this._btnClick = this._btnClick.bind(this)
         this.scroll = React.createRef()

@@ -6,18 +6,21 @@ import axios from 'common/js/http'
 import { url } from 'common/js/config'
 import { toObject, toJS } from 'immutable'
 import TipsStatus from 'base/tipsStatus/tipsStatus'
+import Loading from 'base/loading/loading'
 import './select-car.styl'
 import '../user-baseinfo/userInfo.styl'
 class SelectCar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            carInfoList: [1,2,3,4,5,6,161,1,1,161,1,1]
+            loadingHide: false,
+            carInfoList: []
         }
         this.scroll = React.createRef()
         this.formBox = React.createRef()
         this.getCarList = this.getCarList.bind(this)
         this.selectCarGotoPage = this.selectCarGotoPage.bind(this)
+        this.back =this.back.bind(this)
     }
     componentDidMount() {
         this.getCarList()
@@ -44,6 +47,7 @@ class SelectCar extends Component {
           // localStorage.setItem('CardNum', item.CardNum)
         }
       }
+      
     getCarList () {
         let that = this
         let _params = {
@@ -59,6 +63,7 @@ class SelectCar extends Component {
                     that.setState({
                         carInfoList: res.data.result
                     })
+                    that.setState({loadingHide: true})
                       that.btnDisable = false
                     } else {
                        that.setState({tipsText: res.data.message})
@@ -72,6 +77,9 @@ class SelectCar extends Component {
                 })
      
     }
+    back() {
+        this.props.history.push('/userBaseInfo')
+      }
     render(){
         return(
     <div id="select-car">
@@ -100,11 +108,18 @@ class SelectCar extends Component {
         </div>
         <div className="buttonBox">
         </div>
-        <div className="tips-status-box" style={{'display':'none'}}>
-            <div className="ptc">
-                {/* <tipsStatus statusClass="no-record" title="您暂时还没有办理ETC的车辆哦~" text="办理ETC"></tipsStatus> */}
+        {
+            this.state.carInfoList.length <= 0 && (
+                <div className="tips-status-box">
+                    <div className="ptc">
+                        <TipsStatus statusClass="no-record" title="您暂时还没有办理ETC的车辆哦~" text="办理ETC" btnClick={this.back}></TipsStatus>
+                    </div>
+                </div>
+            )
+        }
+        <div className="loading-box" style={{display: this.state.loadingHide ? 'none': 'block'}}>
+                 <Loading title="数据加载中..." ref={this.loading}></Loading>
             </div>
-        </div>
     </div>)
     }
 }

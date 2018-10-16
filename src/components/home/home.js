@@ -85,7 +85,7 @@ class Home extends Component{
                                     <img src={require('../../common/image/icon-ETC.png')} alt="" onClick={() => this.goToNext('userBaseInfo')}/>
                                     <p>办理ETC</p>
                                 </div>
-                                <div className="card-item" onClick={() => this.goToNext('register')}>
+                                <div className="card-item" onClick={() => this.goToNext('applicationRecordList')}>
                                     <img src={require('../../common/image/icon-applyRecord.png')} alt="" />
                                     <p>申请记录</p>
                                 </div>

@@ -18,6 +18,7 @@ const userAddAddress = LazyLoadComponent({loader: () => import('components/user-
 const SelectCar = LazyLoadComponent({loader: () => import('components/select-car/select-car')})
 const RecordCar = LazyLoadComponent({loader: () => import('components/record-car/record-car')})
 const Bill = LazyLoadComponent({loader: () => import('components/bill/bill')})
+const ApplicationRecordList = LazyLoadComponent({loader: () => import('components/application-record-list/application-record-list')})
 
 class RouteConfig extends Component{
   render() {
@@ -37,6 +38,7 @@ class RouteConfig extends Component{
               <Route path="/selectCar/:id" component={SelectCar}></Route>
               <Route path="/recordCar" component={RecordCar}></Route>
               <Route path="/bill" component={Bill}></Route>
+              <Route path="/applicationRecordList" component={ApplicationRecordList}></Route>
               <Redirect from="/" to="/home"></Redirect>
             </Switch>
           </div>
